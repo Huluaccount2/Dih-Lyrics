@@ -1,0 +1,8 @@
+/cache/
+/node_modules/
+/.npm-cache/
+/temp/
+/settings.json
+/.idea/
+/src/backup/
+/log.txt
