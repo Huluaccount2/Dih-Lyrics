@@ -1,92 +1,57 @@
-# LyricsStatus V3
+# dihlyrics
 
-## What is it?
+Real-time Spotify lyrics -> Discord custom status
 
-LyricsStatus is a tool that changes your Discord status to lyrics of songs you listen to on Spotify!
+Fork/continuation of `lyrics-status`, expanded with WebSocket status updates, a richer settings panel, terminal album art, profiles, status effects, and per-song timing tools.
 
-It is written in TypeScript and runs on Node.js.
+## What it does
 
-## Precautions
+dihlyrics syncs your Discord custom status to the lyrics of your currently playing Spotify track, line by line.
 
-Before you proceed to [Setup](#Setup) please read those precautions.
+It runs locally, opens a browser settings panel at `http://localhost:8999`, fetches lyrics from multiple sources, and updates your Discord status as the song plays. You can tune timing, sources, WebSocket behavior, terminal display, status formatting, emoji behavior, and profiles without editing config files manually.
 
-This tool is provided "AS IS" and doesn't have any warranty that it will work on your machine.
+## Features
 
-I, creator of the LyricsStatus, am not responsible for any consequences that LyricsStatus can lead to.
+| Feature | Details |
+| --- | --- |
+| Multiple lyric sources | Spotify, LrcLib, Musixmatch, QQ Music, NetEase, Genius, Kugou |
+| Source ordering | Toggle and drag lyric sources in the panel |
+| Spotify playback | Supports Spotify API playback detection |
+| Discord presence playback | Can read Spotify playback from Discord presence instead of Spotify API |
+| Discord Gateway mode | Sends status updates through Discord Gateway WebSocket when enabled |
+| REST fallback | Falls back to the normal REST status update path if Gateway is unavailable |
+| Status flash | Cycles Discord presence states while lyrics are active |
+| Presence controls | Online, Idle, Do Not Disturb, Invisible, and restore behavior |
+| Custom status templates | Use variables like lyrics, timestamp, song name, and artist |
+| Unicode font styles | Normal, bold, italic, script, fraktur, monospace, underline, and more |
+| Emoji support | Static emoji, custom Discord emoji, emoji picker, and emoji rotation |
+| Status emojis | Different emoji behavior for playing, paused, no lyrics, and fallback states |
+| Smart line merging | Combines short nearby lyric lines to reduce update spam |
+| Rate-limit protection | Minimum send interval, backoff handling, and merge controls |
+| Per-song offsets | Save timing offsets for specific songs that need adjustment |
+| Autooffset | Learns request timing and applies correction automatically |
+| Terminal dashboard | Live terminal view with song, lyrics, sources, Gateway, rate limits, and debug info |
+| Album art terminal display | Shows album cover as terminal art, with improved rendering where supported |
+| Terminal presets | Dashboard, Compact, Karaoke, and Ops terminal layouts |
+| Profiles | Save and apply groups of settings for different setups |
+| Live panel | Browser UI with now-playing sidebar, lyric preview, settings, and playback controls |
+| Restart button | Restart Lyric Status from the panel |
 
-By using it, you agree with the statements above.
+## Status template variables
 
-## Setup
+```txt
+{lyrics}
+{lyrics_upper}
+{lyrics_lower}
+{lyrics_letters_only}
 
-### Node.js
+{timestamp}
 
-Firstly, you need to [download](https://nodejs.org/en) Node.js.
+{song_name}
+{song_name_upper}
+{song_name_lower}
+{song_name_cropped}
 
-LyricsStatus needs version 17.x.x or higher.
-
-### Downloading LyricsStatus
-
-You can download it using Git or going to [Releases](https://github.com/OvalQuilter/lyrics-status/releases) and downloading source code archive. Then unpack it to the place you want.
-
-For Git, use this command:
-
-```
-git clone --single-branch --branch v3 https://github.com/OvalQuilter/lyrics-status
-```
-
-### Locating to LyricsStatus
-
-#### Windows & Linux
-
-Copy the path to the LyricsStatus folder, often found on top of your File Explorer (`C:\Users\your_profile_name\path\to\LyricsStatus` or `/usr/name/path/to/LyricsStatus` for example).
-
-For Windows, press `Win + R` and type `cmd`, then press `Run`.
-
-For Linux, you need to manually open Terminal from your start menu.
-
-In the opened window type `cd paste_path_you_copied` and press `Enter`.
-
-### Installing modules
-
-Now, you need to install modules. In the command prompt, run the following command:
-
-```
-npm install
-```
-
-Then wait for modules to install.
-
-### Running and configuring
-
-Run `npm run start` to start LyricsStatus.
-
-Now you need to configure it. Open `localhost:8999` in your browser, you should see a menu with various settings.
-
-First, you need to get your Discord token. [Here's](https://www.youtube.com/watch?v=LnBnm_tZlyU) a nice video on how to do it.
-
-After getting your token you need to paste it, head back to the menu and paste it in the `Token` input field. Remove quotes if there are any.
-
-Second, you need to get your Spotify cookies. Open [Spotify](https://open.spotify.com/) in your browser, then press `F12` or `Ctrl + Alt + I`, depending on your browser.
-
-Head to the `Network` tab or similar, you should see something like this:
-
-![Network Tab](res/network_tab.png)
-
-Now reload the page, wait for it to load, and search for something like `open.spotify.com` (often it's appear on top):
-
-![Request](res/request.png)
-
-Click on it, in the opened window search for `Cookie:`, it's your cookies. Copy and paste them in `Cookie` input field in the menu.
-
-Start some song in Spotify, if it has lyrics, you should see current lyrics in your command prompt as well as in your Discord status.
-
-### Troubleshooting
-
-#### Windows
-
-Try running command line with administrator privileges or disabling your firewall.
-
-#### Linux
-
-Try running Terminal from `su` user.
-
+{song_author}
+{song_author_upper}
+{song_author_lower}
