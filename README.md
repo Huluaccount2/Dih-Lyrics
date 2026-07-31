@@ -1,6 +1,6 @@
 # dihlyrics
 
-Real-time Spotify lyrics -> Discord custom status
+Puts your song lyrics in your discord status
 
 Fork/continuation of `lyrics-status`, expanded with WebSocket status updates, a richer settings panel, terminal album art, profiles, status effects, and per-song timing tools.
 
