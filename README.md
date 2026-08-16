@@ -1,6 +1,6 @@
 # dihlyrics
 
-Puts your Youtube videos and songs into your spotify status
+Puts your Youtube videos and songs into your discord status
 
 Fork and actively developed continuation of `lyrics-status`, expanded with YouTube support, Discord Gateway updates, Rich Presence, community profiles, customizable interfaces, terminal album art, advanced timing tools, and much more.
 
